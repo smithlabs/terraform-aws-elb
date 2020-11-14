@@ -1,4 +1,4 @@
-# Application Load Balancer 
+# Classic Load Balancer 
 
 This folder contains an example [Terraform](https://www.terraform.io/) configuration that defines a module for 
 deploying a load balancer (using [ELB](https://aws.amazon.com/elasticloadbalancing/)) in an 
