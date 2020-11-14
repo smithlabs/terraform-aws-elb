@@ -1,3 +1,9 @@
+# ---------------------------------------------------------------------------------------------------------------------
+# VERSIONING
+# This project was written for Terraform 0.13.x
+# See 'Upgrading to Terraform v0.13' https://www.terraform.io/upgrade-guides/0-13.html
+# ---------------------------------------------------------------------------------------------------------------------
+
 terraform {
   required_version = ">= 0.13"
 }
@@ -9,12 +15,20 @@ provider "aws" {
   version = "~> 2.0"
 }
 
+# ---------------------------------------------------------------------------------------------------------------------
+# CREATE AN ELB 
+# ---------------------------------------------------------------------------------------------------------------------
+
 module "elb" {
   source = "../../"
 
   elb_name 	    = var.elb_name
   subnet_ids        = data.aws_subnet_ids.default.ids
 }
+
+# ---------------------------------------------------------------------------------------------------------------------
+# CREATE SECURITY RULES THAT ALLOW ALL TRAFFIC IN/OUT
+# ---------------------------------------------------------------------------------------------------------------------
 
 resource "aws_security_group_rule" "allow_all_inbound" {
   type		    = "ingress"
@@ -24,6 +38,16 @@ resource "aws_security_group_rule" "allow_all_inbound" {
   to_port	    = local.any_port
   protocol	    = local.any_protocol
   cidr_blocks	    = local.all_ips
+}
+
+resource "aws_security_group_rule" "allow_elb_all_outbound" {
+  type              = "egress"
+  security_group_id = module.elb.elb_security_group_id
+
+  from_port         = local.any_port
+  to_port           = local.any_port
+  protocol          = local.any_protocol
+  cidr_blocks       = local.all_ips
 }
 
 data "aws_vpc" "default" {

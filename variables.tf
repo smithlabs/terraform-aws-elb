@@ -1,6 +1,6 @@
 # ---------------------------------------------------------------------------------------------------------------------
 # REQUIRED PARAMETERS
-# You must provide a value for each of these parameters.
+# You must provide a value for each of these parameters
 # ---------------------------------------------------------------------------------------------------------------------
 
 variable "elb_name" {
