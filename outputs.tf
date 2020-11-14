@@ -3,7 +3,7 @@ output "elb_dns_name" {
   value       = aws_elb.elb.dns_name
 }
 
-output "this_elb_name" {
+output "elb_name" {
   description = "The name of the ELB"
   value       = aws_elb.elb.name
 }
