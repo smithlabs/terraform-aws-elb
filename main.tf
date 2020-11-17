@@ -13,15 +13,15 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "aws_elb" "elb" {
-  name               = var.elb_name
-  security_groups    = [aws_security_group.elb.id]
-  subnets            = var.subnet_ids
+  name            = var.elb_name
+  security_groups = [aws_security_group.elb.id]
+  subnets         = var.subnet_ids
 
   listener {
-    instance_port      = var.instance_port
-    instance_protocol  = var.instance_protocol
-    lb_port            = var.lb_port
-    lb_protocol        = var.lb_protocol
+    instance_port     = var.instance_port
+    instance_protocol = var.instance_protocol
+    lb_port           = var.lb_port
+    lb_protocol       = var.lb_protocol
   }
 }
 

@@ -5,7 +5,7 @@
 
 variable "elb_name" {
   description = "To name to use for ELB"
-  type	      = string
+  type        = string
 }
 
 variable "subnet_ids" {

@@ -22,8 +22,8 @@ provider "aws" {
 module "elb" {
   source = "../../"
 
-  elb_name 	    = var.elb_name
-  subnet_ids        = data.aws_subnet_ids.default.ids
+  elb_name   = var.elb_name
+  subnet_ids = data.aws_subnet_ids.default.ids
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -31,23 +31,23 @@ module "elb" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "aws_security_group_rule" "allow_all_inbound" {
-  type		    = "ingress"
-  security_group_id  = module.elb.elb_security_group_id
+  type              = "ingress"
+  security_group_id = module.elb.elb_security_group_id
 
-  from_port	    = local.any_port
-  to_port	    = local.any_port
-  protocol	    = local.any_protocol
-  cidr_blocks	    = local.all_ips
+  from_port   = local.any_port
+  to_port     = local.any_port
+  protocol    = local.any_protocol
+  cidr_blocks = local.all_ips
 }
 
 resource "aws_security_group_rule" "allow_elb_all_outbound" {
   type              = "egress"
   security_group_id = module.elb.elb_security_group_id
 
-  from_port         = local.any_port
-  to_port           = local.any_port
-  protocol          = local.any_protocol
-  cidr_blocks       = local.all_ips
+  from_port   = local.any_port
+  to_port     = local.any_port
+  protocol    = local.any_protocol
+  cidr_blocks = local.all_ips
 }
 
 data "aws_vpc" "default" {
@@ -59,7 +59,7 @@ data "aws_subnet_ids" "default" {
 }
 
 locals {
-  any_port            =  0
-  any_protocol        = "-1"
-  all_ips             = ["0.0.0.0/0"]
+  any_port     = 0
+  any_protocol = "-1"
+  all_ips      = ["0.0.0.0/0"]
 }
